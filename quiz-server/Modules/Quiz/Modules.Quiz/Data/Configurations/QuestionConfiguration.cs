@@ -11,7 +11,6 @@ namespace Modules.Quiz.Infrastructure.Data.Configurations
             builder.HasKey(q => q.Id);
             builder.Property(q => q.Text).IsRequired().HasMaxLength(500);
             builder.Property(q => q.QuestionType).IsRequired();
-            builder.Property(q => q.ImageUrl).IsRequired(false);
             builder.Property(q => q.Order).IsRequired();
             builder.HasMany(q => q.Answers)
                    .WithOne(a => a.Question)
