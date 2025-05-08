@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Modules.Quiz.Infrastructure.Data.Migrations
+namespace Modules.Quiz.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -21,6 +21,7 @@ namespace Modules.Quiz.Infrastructure.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    PassingScore = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
@@ -39,7 +40,6 @@ namespace Modules.Quiz.Infrastructure.Data.Migrations
                     QuestionType = table.Column<string>(type: "text", nullable: false),
                     Text = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     Order = table.Column<int>(type: "integer", nullable: false),
-                    ImageUrl = table.Column<string>(type: "text", nullable: true),
                     Explanation = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -65,6 +65,8 @@ namespace Modules.Quiz.Infrastructure.Data.Migrations
                     StartedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CompletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Score = table.Column<int>(type: "integer", nullable: true),
+                    IsPassed = table.Column<bool>(type: "boolean", nullable: true),
+                    TimeSpent = table.Column<TimeSpan>(type: "interval", nullable: true),
                     Status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>

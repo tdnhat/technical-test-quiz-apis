@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Modules.Quiz.Infrastructure.Data.Migrations
+namespace Modules.Quiz.Data.Migrations
 {
     [DbContext(typeof(QuizDbContext))]
     partial class QuizDbContextModelSnapshot : ModelSnapshot
@@ -56,9 +56,6 @@ namespace Modules.Quiz.Infrastructure.Data.Migrations
                     b.Property<string>("Explanation")
                         .HasColumnType("text");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("text");
-
                     b.Property<int>("Order")
                         .HasColumnType("integer");
 
@@ -91,6 +88,9 @@ namespace Modules.Quiz.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("PassingScore")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -113,6 +113,9 @@ namespace Modules.Quiz.Infrastructure.Data.Migrations
                     b.Property<DateTime?>("CompletedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<bool?>("IsPassed")
+                        .HasColumnType("boolean");
+
                     b.Property<Guid>("QuizId")
                         .HasColumnType("uuid");
 
@@ -126,6 +129,9 @@ namespace Modules.Quiz.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
+
+                    b.Property<TimeSpan?>("TimeSpent")
+                        .HasColumnType("interval");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");

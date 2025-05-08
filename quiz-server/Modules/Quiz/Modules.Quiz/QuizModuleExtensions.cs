@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modules.Quiz.Infrastructure;
 using Modules.Quiz.Infrastructure.Data;
 
 namespace Modules.Quiz
@@ -12,16 +13,23 @@ namespace Modules.Quiz
         {
             // Add quiz module services here if needed
             services.AddDbContext<QuizDbContext>(options =>
-                           options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
+                b => b.MigrationsAssembly("Modules.Quiz")));
+
+            // Register repositories
+            services.AddScoped<IQuizRepository, QuizRepository>();
 
             return services.BuildServiceProvider();
         }
 
         public static WebApplication UseQuizModule(this WebApplication app)
         {
-            // Configure quiz module middleware here if needed
-
+            // Apply migrations
+            using var scope = app.Services.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<QuizDbContext>();
+            context.Database.Migrate();
             return app;
         }
+
     }
 }

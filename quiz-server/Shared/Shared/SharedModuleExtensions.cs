@@ -14,6 +14,7 @@ namespace Shared
             // Add HTTP context accessor for dependency injection
             builder.Services.AddHttpContextAccessor();
 
+            // Add services to the container.
             builder.Services.AddEndpointsApiExplorer();
 
             // Configure Swagger with authentication
@@ -32,11 +33,8 @@ namespace Shared
 
         public static WebApplication UseCoreMiddleware(this WebApplication app)
         {
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
             app.UseRouting();
