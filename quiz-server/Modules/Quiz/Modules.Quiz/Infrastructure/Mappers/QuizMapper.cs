@@ -17,6 +17,7 @@ namespace Modules.Quiz.Infrastructure.Mappers
                     Order = q.Order,
                     QuestionType = q.QuestionType,
                     Text = q.Text,
+                    Explanation = q.Explanation ?? string.Empty,
                     Answers = q.Answers.Select(a => new AnswerDto
                     {
                         Id = a.Id,
