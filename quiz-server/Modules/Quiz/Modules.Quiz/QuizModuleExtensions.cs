@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Quiz.Infrastructure;
 using Modules.Quiz.Infrastructure.Data;
+using Modules.Quiz.Infrastructure.Repositories;
 
 namespace Modules.Quiz
 {
@@ -18,6 +19,7 @@ namespace Modules.Quiz
 
             // Register repositories
             services.AddScoped<IQuizRepository, QuizRepository>();
+            services.AddScoped<IQuizAttemptRepository, QuizAttemptRepository>();
 
             return services.BuildServiceProvider();
         }
