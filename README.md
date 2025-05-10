@@ -212,7 +212,7 @@ The application uses PostgreSQL with the following main entities:
 
 1. Clone the repository
    ```
-   git clone <repository-url>
+   git clone https://github.com/tdnhat/technical-test-quiz-apis
    cd quiz-server
    ```
 
