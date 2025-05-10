@@ -13,8 +13,7 @@ namespace Modules.Quiz.Features.CompleteQuiz
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/quizzes/{id}/attempts/{attemptId}/complete", async (
-                [FromRoute] Guid id,
+            app.MapPost("/api/attempts/{attemptId}/complete", async (
                 [FromRoute] Guid attemptId,
                 [FromServices] IQuizAttemptRepository quizAttemptRepo,
                 [FromServices] IQuizRepository quizRepo
@@ -26,10 +25,10 @@ namespace Modules.Quiz.Features.CompleteQuiz
                     return Results.NotFound("Quiz attempt not found");
                 }
 
-                var quiz = await quizRepo.GetByIdWithQuestionsAndAnswersAsync(id);
+                var quiz = await quizRepo.GetByIdWithQuestionsAndAnswersAsync(attempt.QuizId);
                 if (quiz == null)
                 {
-                    return Results.NotFound("Quiz not found");
+                    return Results.NotFound("No quiz found for this attempt");
                 }
 
                 if (attempt.CompletedAt != null)
@@ -39,7 +38,6 @@ namespace Modules.Quiz.Features.CompleteQuiz
 
                 var totalQuestions = quiz.Questions.Count;
                 var correctAnswers = attempt.UserAnswers.Count(x => x.IsCorrect == true);
-                var incorrectAnswers = totalQuestions - correctAnswers;
                 var score = totalQuestions > 0 ? correctAnswers * 100 / (double)totalQuestions : 0;
                 var isPassed = score >= quiz.PassingScore;
 
@@ -54,24 +52,13 @@ namespace Modules.Quiz.Features.CompleteQuiz
                     await quizAttemptRepo.UpdateAsync(attempt);
                 }
 
-                var result = new QuizResultDto
-                {
-                    QuizId = attempt.QuizId,
-                    UserId = attempt.UserId,
-                    Status = attempt.Status,
-                    Score = attempt.Score ?? 0,
-                    IsPassed = attempt.IsPassed ?? false,
-                    TimeSpent = attempt.TimeSpent ?? TimeSpan.Zero,
-                    TotalQuestions = totalQuestions,
-                    CorrectAnswers = correctAnswers,
-                    IncorrectAnswers = incorrectAnswers
-                };
-
-                return Results.Ok(result);
+                var completionResult = attempt.ToCompletionDto();
+                
+                return Results.Ok(completionResult);
             })
             .WithTags("Quizzes")
             .WithName("CompleteQuiz")
-            .Produces<QuizResultDto>(StatusCodes.Status200OK)
+            .Produces<QuizCompletionDto>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status404NotFound);
         }

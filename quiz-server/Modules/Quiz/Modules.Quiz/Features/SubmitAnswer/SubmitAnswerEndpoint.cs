@@ -14,8 +14,7 @@ namespace Modules.Quiz.Features.SubmitAnswer
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/quizzes/{id}/attempts/{attemptId}/answers", async (
-                [FromRoute] Guid id,
+            app.MapPost("/api/attempts/{attemptId}/answers", async (
                 [FromRoute] Guid attemptId,
                 [FromBody] SubmitAnswerRequestDto request,
                 [FromServices] IQuizAttemptRepository quizAttemptRepo

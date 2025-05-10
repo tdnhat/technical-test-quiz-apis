@@ -15,8 +15,8 @@ namespace Modules.Quiz.Features.StartQuiz
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/quizzes/{id}/attempts", async (
-                [FromRoute] Guid id,
+            app.MapPost("/api/quizzes/{quizId}/attempts", async (
+                [FromRoute] Guid quizId,
                 [FromServices] IQuizAttemptRepository quizAttemptRepo,
                 [FromServices] IQuizRepository quizRepo,
                 [FromServices] IHttpContextAccessor httpContextAccessor
@@ -33,7 +33,7 @@ namespace Modules.Quiz.Features.StartQuiz
                 context.Session.SetString("UserId", userId);
 
                 // Validate quiz
-                var quiz = await quizRepo.GetByIdAsync(id);
+                var quiz = await quizRepo.GetByIdAsync(quizId);
                 if (quiz == null)
                 {
                     return Results.NotFound("Quiz not found");
@@ -56,7 +56,7 @@ namespace Modules.Quiz.Features.StartQuiz
                 var quizAttemptDto = savedAttempt.ToDto();
 
                 // Return attempt
-                return Results.Created($"/api/quizzes/{id}/attempts/{attempt.Id}", quizAttemptDto);
+                return Results.Created($"/api/quizzes/{quizId}/attempts/{attempt.Id}", quizAttemptDto);
             })
             .WithTags("Quizzes")
             .WithName("StartQuiz")

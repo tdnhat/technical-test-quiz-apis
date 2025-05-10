@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using Modules.Quiz.Infrastructure.Repositories;
 using Modules.Quiz.Dto;
 using Modules.Quiz.Infrastructure;
+using Modules.Quiz.Infrastructure.Mappers;
 using System.Linq;
 
 namespace Modules.Quiz.Features.GetQuizResult
@@ -40,53 +41,9 @@ namespace Modules.Quiz.Features.GetQuizResult
                     return Results.NotFound("Quiz not found");
                 }
 
-                var totalQuestions = quiz.Questions.Count;
-                var correctAnswers = attempt.UserAnswers.Count(x => x.IsCorrect == true);
-                var incorrectAnswers = totalQuestions - correctAnswers;
-
-                // Create answer reviews for each question
-                var answerReviews = new List<QuizAnswerReviewDto>();
-                foreach (var question in quiz.Questions.OrderBy(x => x.Order))
-                {
-                    // Find user's answer for this question
-                    var userAnswer = attempt.UserAnswers.FirstOrDefault(ua => ua.QuestionId == question.Id);
-
-                    // Find correct answer for this question
-                    var correctAnswer = question.Answers.FirstOrDefault(a => a.IsCorrect);
-                    if (correctAnswer == null)
-                    {
-                        continue;
-                    }
-
-                    // Get the answer text that the user selected (if any)
-                    var selectedAnswer = userAnswer?.AnswerId != null
-                        ? question.Answers.FirstOrDefault(a => a.Id == userAnswer.AnswerId)
-                        : null;
-
-                    answerReviews.Add(new QuizAnswerReviewDto
-                    {
-                        QuestionId = question.Id,
-                        QuestionText = question.Text,
-                        CorrectAnswerText = correctAnswer.Text,
-                        UserSelectedAnswerText = selectedAnswer?.Text ?? "No answer selected",
-                        IsCorrect = userAnswer?.IsCorrect ?? false,
-                    });
-                }
-
-                var result = new QuizResultDto
-                {
-                    QuizId = attempt.QuizId,
-                    UserId = attempt.UserId,
-                    Status = attempt.Status,
-                    Score = attempt.Score ?? 0,
-                    IsPassed = attempt.IsPassed ?? false,
-                    TimeSpent = attempt.TimeSpent ?? TimeSpan.Zero,
-                    TotalQuestions = totalQuestions,
-                    CorrectAnswers = correctAnswers,
-                    IncorrectAnswers = incorrectAnswers,
-                    AnswerReviews = answerReviews
-                };
-
+                // Map to result DTO
+                var result = attempt.ToResultDto(quiz);
+                
                 return Results.Ok(result);
             })
             .WithTags("Quizzes")
