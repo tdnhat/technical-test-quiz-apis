@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "c347ecd5-0a7e-4dad-99e6-289de15ece86",
+		"name": "Quiz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44832196",
+		"_collection_link": "https://nhattruong-345385.postman.co/workspace/Nhat-Truong's-Workspace~61244d28-e1e5-4b0b-8f2a-1f81c4af8fcf/collection/44832196-c347ecd5-0a7e-4dad-99e6-289de15ece86?action=share&source=collection_link&creator=44832196"
+	},
+	"item": [
+		{
+			"name": "List of questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/quizzes/8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785/questions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"quizzes",
+						"8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785",
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start quiz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/api/quizzes/8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785/attempts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"quizzes",
+						"8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785",
+						"attempts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit answer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"questionId\": \"bd6cb810-5d4d-47aa-86dd-c65af9f4b44b\",\r\n  \"selectedAnswerId\": \"7d0fd525-880b-41d6-96c9-42bd234a9399\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/attempts/9538ec3f-be8e-4627-bbb8-2c1679b05326/answers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"attempts",
+						"9538ec3f-be8e-4627-bbb8-2c1679b05326",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Complete quiz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/attempts/9538ec3f-be8e-4627-bbb8-2c1679b05326/complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"attempts",
+						"9538ec3f-be8e-4627-bbb8-2c1679b05326",
+						"complete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get attempt result",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/attempts/9538ec3f-be8e-4627-bbb8-2c1679b05326/results",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"attempts",
+						"9538ec3f-be8e-4627-bbb8-2c1679b05326",
+						"results"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
