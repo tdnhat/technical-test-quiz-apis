@@ -27,7 +27,52 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/quizzes/8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"quizzes",
+								"8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785",
+								"questions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 10 May 2025 07:11:35 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785\",\n    \"title\": \"JavaScript Fundamentals\",\n    \"thumbnailUrl\": \"\",\n    \"passingScore\": 60,\n    \"questions\": [\n        {\n            \"id\": \"bd6cb810-5d4d-47aa-86dd-c65af9f4b44b\",\n            \"order\": 1,\n            \"questionType\": \"multiple-choice\",\n            \"text\": \"What is the correct way to declare a constant in JavaScript?\",\n            \"explanation\": \"JavaScript has three ways to declare variables: var, let, and const. Introduced in ES6 (2015), 'const' creates a block-scoped variable whose reference cannot be reassigned after initialization. While the reference is immutable, the contents of objects and arrays declared with const can still be modified. This is different from true constants in languages like C++ where the value itself is immutable.\",\n            \"answers\": [\n                {\n                    \"id\": \"1b6f5218-178b-4468-90ae-54c9d69e423a\",\n                    \"text\": \"constant x = 10;\",\n                    \"isCorrect\": false\n                },\n                {\n                    \"id\": \"469df8a6-3cf7-45b6-88b3-361702a8e03e\",\n                    \"text\": \"let x = 10;\",\n                    \"isCorrect\": false\n                },\n                {\n                    \"id\": \"7d0fd525-880b-41d6-96c9-42bd234a9399\",\n                    \"text\": \"const x = 10;\",\n                    \"isCorrect\": true\n                },\n                {\n                    \"id\": \"ebcec3ed-56f9-4bbd-a13f-89ff26cb13f7\",\n                    \"text\": \"var x = 10;\",\n                    \"isCorrect\": false\n                }\n            ]\n        },\n        {\n            \"id\": \"c32b6386-0535-4e9c-a3aa-5d0621145eb5\",\n            \"order\": 2,\n            \"questionType\": \"multiple-choice\",\n            \"text\": \"Which function is used to parse a string to an integer in JavaScript?\",\n            \"explanation\": \"JavaScript provides several methods for type conversion. The parseInt() function parses a string and returns an integer of the specified radix or base. It's important to note that parseInt() stops parsing when it encounters a non-numeric character, and it can take an optional second parameter to specify the radix (e.g., parseInt('FF', 16) returns 255). For floating-point conversion, parseFloat() would be used instead.\",\n            \"answers\": [\n                {\n                    \"id\": \"2b8c1553-b60d-4306-b826-5246924fdbc2\",\n                    \"text\": \"Integer.parse()\",\n                    \"isCorrect\": false\n                },\n                {\n                    \"id\": \"3ddc0fc9-06f0-4525-a556-e9c248e18cdc\",\n                    \"text\": \"parseInt()\",\n                    \"isCorrect\": true\n                },\n                {\n                    \"id\": \"5a8fc968-7086-4c10-b7f1-a2a936f19849\",\n                    \"text\": \"parseInteger()\",\n                    \"isCorrect\": false\n                },\n                {\n                    \"id\": \"5a9fb000-38d0-4afa-bbf0-7d9b3bf3d4bf\",\n                    \"text\": \"int.parse()\",\n                    \"isCorrect\": false\n                }\n            ]\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Start quiz",
@@ -49,7 +94,56 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Sample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/api/quizzes/8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785/attempts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"quizzes",
+								"8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785",
+								"attempts"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 10 May 2025 07:11:24 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Location",
+							"value": "/api/quizzes/8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785/attempts/eb6baf9d-a32a-48fa-9107-7fc7d4c3cb0e"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"attemptId\": \"eb6baf9d-a32a-48fa-9107-7fc7d4c3cb0e\",\n    \"quizId\": \"8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785\",\n    \"userId\": \"5badb974-a2dd-489b-862d-dfa2b80ad355\",\n    \"startedAt\": \"2025-05-10T07:11:25.2515591Z\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Submit answer",
@@ -80,7 +174,61 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Sample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"questionId\": \"bd6cb810-5d4d-47aa-86dd-c65af9f4b44b\",\r\n  \"selectedAnswerId\": \"7d0fd525-880b-41d6-96c9-42bd234a9399\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/attempts/9538ec3f-be8e-4627-bbb8-2c1679b05326/answers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"attempts",
+								"9538ec3f-be8e-4627-bbb8-2c1679b05326",
+								"answers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 10 May 2025 06:58:45 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"b727007c-422a-4daa-85de-28bc3b3f289f\",\n    \"questionId\": \"bd6cb810-5d4d-47aa-86dd-c65af9f4b44b\",\n    \"selectedAnswerId\": \"7d0fd525-880b-41d6-96c9-42bd234a9399\",\n    \"submittedAt\": \"2025-05-10T06:58:46.1693015Z\",\n    \"isCorrect\": true,\n    \"feedback\": \"Correct!\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Complete quiz",
@@ -111,7 +259,61 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Sample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/attempts/9538ec3f-be8e-4627-bbb8-2c1679b05326/complete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"attempts",
+								"9538ec3f-be8e-4627-bbb8-2c1679b05326",
+								"complete"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 10 May 2025 06:59:21 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"quizId\": \"8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785\",\n    \"userId\": \"5badb974-a2dd-489b-862d-dfa2b80ad355\",\n    \"status\": \"completed\",\n    \"score\": 50,\n    \"isPassed\": false,\n    \"timeSpent\": \"00:01:06.4500988\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Get attempt result",
@@ -145,7 +347,61 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/attempts/9538ec3f-be8e-4627-bbb8-2c1679b05326/results",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"attempts",
+								"9538ec3f-be8e-4627-bbb8-2c1679b05326",
+								"results"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 10 May 2025 06:59:56 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"quizId\": \"8b2b73c2-1e0a-4c67-84f4-7f4e62ecf785\",\n    \"userId\": \"5badb974-a2dd-489b-862d-dfa2b80ad355\",\n    \"status\": \"completed\",\n    \"score\": 50,\n    \"isPassed\": false,\n    \"timeSpent\": \"00:01:06.4500980\",\n    \"totalQuestions\": 2,\n    \"correctAnswers\": 1,\n    \"incorrectAnswers\": 1,\n    \"answerReviews\": [\n        {\n            \"questionId\": \"bd6cb810-5d4d-47aa-86dd-c65af9f4b44b\",\n            \"questionText\": \"What is the correct way to declare a constant in JavaScript?\",\n            \"correctAnswerText\": \"const x = 10;\",\n            \"userSelectedAnswerText\": \"const x = 10;\",\n            \"isCorrect\": true\n        },\n        {\n            \"questionId\": \"c32b6386-0535-4e9c-a3aa-5d0621145eb5\",\n            \"questionText\": \"Which function is used to parse a string to an integer in JavaScript?\",\n            \"correctAnswerText\": \"parseInt()\",\n            \"userSelectedAnswerText\": \"No answer selected\",\n            \"isCorrect\": false\n        }\n    ]\n}"
+				}
+			]
 		}
 	]
 }
