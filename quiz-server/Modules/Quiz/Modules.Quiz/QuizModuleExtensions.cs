@@ -29,9 +29,22 @@ namespace Modules.Quiz
             // Apply migrations
             using var scope = app.Services.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<QuizDbContext>();
-            context.Database.Migrate();
+            
+            try
+            {
+                // Check if tables already exist
+                if (!context.Quizzes.Any())
+                {
+                    context.Database.Migrate();
+                }
+            }
+            catch
+            {
+                // If there's an error, try to ensure the database is created
+                context.Database.EnsureCreated();
+            }
+            
             return app;
         }
-
     }
 }

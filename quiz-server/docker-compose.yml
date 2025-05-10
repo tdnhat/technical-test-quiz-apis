@@ -1,11 +1,15 @@
 version: '3.4'
 
 services:
-  # api:
-  #   image: ${DOCKER_REGISTRY-}api
-  #   build:
-  #     context: .
-  #     dockerfile: Bootstrapper/Api/Dockerfile
+  api:
+    build:
+      context: .
+      dockerfile: Bootstrapper/Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    depends_on:
+      - postgres
 
   postgres:
     image: postgres:latest
@@ -13,8 +17,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: QuizServerDb
-    ports:
-      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
