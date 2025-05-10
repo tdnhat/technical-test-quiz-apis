@@ -13,6 +13,6 @@ namespace Modules.Quiz.Domain
         public TimeSpan? TimeSpent { get; set; }
         public string Status { get; set; } = "in-progress"; // in-progress, completed, abandoned
         public List<UserAnswer> UserAnswers { get; set; } = new();
-        public Quiz Quiz { get; set; } = new();
+        public Quiz Quiz { get; set; }
     }
 }

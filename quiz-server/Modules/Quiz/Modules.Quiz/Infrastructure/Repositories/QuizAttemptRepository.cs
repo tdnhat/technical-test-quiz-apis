@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Modules.Quiz.Domain;
 using Modules.Quiz.Dto;
 using Modules.Quiz.Infrastructure.Data;
@@ -20,5 +21,20 @@ namespace Modules.Quiz.Infrastructure.Repositories
             return attempt;
         }
 
+        public async Task<UserAnswer?> AddUserAnswerAsync(UserAnswer userAnswer)
+        {
+            await _context.UserAnswers.AddAsync(userAnswer);
+            await _context.SaveChangesAsync();
+            return userAnswer;
+        }
+
+        public async Task<QuizAttempt?> GetByIdWithAnswersAsync(Guid id)
+        {
+            return await _context.QuizAttempts
+                .Include(a => a.Quiz)
+                    .ThenInclude(q => q.Questions)
+                        .ThenInclude(q => q.Answers)
+                .FirstOrDefaultAsync(a => a.Id == id);
+        }
     }
 }

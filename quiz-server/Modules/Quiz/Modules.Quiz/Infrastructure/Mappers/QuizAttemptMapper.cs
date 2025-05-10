@@ -9,7 +9,7 @@ namespace Modules.Quiz.Infrastructure.Mappers
         {
             return new QuizAttemptDto
             {
-                Id = attempt.Id,
+                AttemptId = attempt.Id,
                 QuizId = attempt.QuizId,
                 UserId = attempt.UserId,
                 StartedAt = attempt.StartedAt

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Modules.Quiz.Domain;
 using Modules.Quiz.Dto;
+using Modules.Quiz.Infrastructure;
 using Modules.Quiz.Infrastructure.Mappers;
 using Modules.Quiz.Infrastructure.Repositories;
 
@@ -17,6 +18,7 @@ namespace Modules.Quiz.Features.StartQuiz
             app.MapPost("/api/quizzes/{id}/attempts", async (
                 [FromRoute] Guid id,
                 [FromServices] IQuizAttemptRepository quizAttemptRepo,
+                [FromServices] IQuizRepository quizRepo,
                 [FromServices] IHttpContextAccessor httpContextAccessor
             ) =>
             {
@@ -30,10 +32,17 @@ namespace Modules.Quiz.Features.StartQuiz
                 var userId = context.Session.GetString("UserId") ?? Guid.NewGuid().ToString();
                 context.Session.SetString("UserId", userId);
 
+                // Validate quiz
+                var quiz = await quizRepo.GetByIdAsync(id);
+                if (quiz == null)
+                {
+                    return Results.NotFound("Quiz not found");
+                }
+
                 // Create attempt
                 var attempt = new QuizAttempt
                 {
-                    QuizId = id,
+                    QuizId = quiz.Id,
                     UserId = Guid.Parse(userId),
                     StartedAt = DateTime.UtcNow
                 };
@@ -47,13 +56,12 @@ namespace Modules.Quiz.Features.StartQuiz
                 var quizAttemptDto = savedAttempt.ToDto();
 
                 // Return attempt
-                return Results.Created($"/api/quizzes/{id}/attempts/{savedAttempt.Id}", quizAttemptDto);
+                return Results.Created($"/api/quizzes/{id}/attempts/{attempt.Id}", quizAttemptDto);
             })
             .WithTags("Quizzes")
             .WithName("StartQuiz")
             .Produces<QuizAttemptDto>(StatusCodes.Status201Created)
             .ProducesProblem(StatusCodes.Status400BadRequest);
         }
-
     }
 }
