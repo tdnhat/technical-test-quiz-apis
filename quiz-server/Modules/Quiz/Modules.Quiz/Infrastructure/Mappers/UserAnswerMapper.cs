@@ -13,7 +13,7 @@ namespace Modules.Quiz.Infrastructure.Mappers
                 Id = userAnswer.Id,
                 QuestionId = userAnswer.QuestionId,
                 SelectedAnswerId = userAnswer.AnswerId,
-                IsCorrect = userAnswer.IsCorrect ?? false,
+                IsCorrect = userAnswer.IsCorrect == true,
                 SubmittedAt = userAnswer.SubmittedAt,
                 Feedback = feedback
             };

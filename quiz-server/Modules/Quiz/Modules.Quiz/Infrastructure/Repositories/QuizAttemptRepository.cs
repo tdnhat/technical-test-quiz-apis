@@ -28,13 +28,28 @@ namespace Modules.Quiz.Infrastructure.Repositories
             return userAnswer;
         }
 
+        public async Task<QuizAttempt?> GetByIdAsync(Guid id)
+        {
+            return await _context.QuizAttempts.FindAsync(id);
+        }
+
+
         public async Task<QuizAttempt?> GetByIdWithAnswersAsync(Guid id)
         {
             return await _context.QuizAttempts
+                .Include(a => a.UserAnswers)
                 .Include(a => a.Quiz)
                     .ThenInclude(q => q.Questions)
                         .ThenInclude(q => q.Answers)
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
+
+        public async Task<QuizAttempt?> UpdateAsync(QuizAttempt attempt)
+        {
+            _context.QuizAttempts.Update(attempt);
+            await _context.SaveChangesAsync();
+            return attempt;
+        }
+
     }
 }

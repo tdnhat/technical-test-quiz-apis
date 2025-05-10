@@ -12,7 +12,7 @@ namespace Modules.Quiz.Infrastructure.Mappers
                 AttemptId = attempt.Id,
                 QuizId = attempt.QuizId,
                 UserId = attempt.UserId,
-                StartedAt = attempt.StartedAt
+                StartedAt = attempt.StartedAt,
             };
         }
     }
