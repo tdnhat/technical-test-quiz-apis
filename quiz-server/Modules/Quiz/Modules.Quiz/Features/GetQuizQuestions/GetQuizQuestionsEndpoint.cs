@@ -13,15 +13,15 @@ namespace Modules.Quiz.Features.GetQuizQuestions
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("/api/quizzes/{id}/questions", async (
-                [FromRoute] Guid id,
+            app.MapGet("/api/quizzes/{quizId}/questions", async (
+                [FromRoute] Guid quizId,
                 [FromServices] IQuizRepository quizRepo
             ) =>
             {
-                var quiz = await quizRepo.GetByIdWithQuestionsAndAnswersAsync(id);
+                var quiz = await quizRepo.GetByIdWithQuestionsAndAnswersAsync(quizId);
                 if (quiz is null)
                 {
-                    return Results.NotFound($"Quiz with quizId {id} not found");
+                    return Results.NotFound($"Quiz with quizId {quizId} not found");
                 }
 
                 var quizDto = quiz.ToDto();

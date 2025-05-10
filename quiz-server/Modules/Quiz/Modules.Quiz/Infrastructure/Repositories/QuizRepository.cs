@@ -13,6 +13,11 @@ namespace Modules.Quiz.Infrastructure
             _context = context;
         }
 
+        public async Task<Domain.Quiz?> GetByIdAsync(Guid id)
+        {
+            return await _context.Quizzes.FirstOrDefaultAsync(q => q.Id == id);
+        }
+
         public async Task<Domain.Quiz?> GetByIdWithQuestionsAndAnswersAsync(Guid id)
         {
             var quiz = await _context.Quizzes
